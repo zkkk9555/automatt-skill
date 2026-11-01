@@ -103,7 +103,7 @@ and continue.
 - **永不降清单**：STOP 清单、危险护栏、如实报告、收尾必写、不许编证据——lite 不是省 token 手段；只升不静降（中途做不到当轮补 `AUTO-DOWN：mode=lite｜cause=…`，禁事后静默）；强档走 lite = deviation；连续 lite 收尾日志点名。
 - **na** 仅限三类：纯理解/只读报告（附 file:line＋零改动声明）｜误触发无活可干｜BLOCKED/NEEDS-HUMAN 停。**typo / 文案 / 单行 config-row 是 Lane A，不是 na**（V2.034 现场：README 错字被误判 na → 没 T0、没账本、没提交）；na 轮也必须写中央条（`链: ask-matt`，产物=改动或零改动声明）并提交（非 git 仓除外），“子会话留给父会话记”= malformed。
 - `deviation: <环节>|<类：capability|config|na|skipped>|<补偿|无>|<位置>`——该做未做/降级替代**当轮**写；收尾日志强制 `deviation: none|逐项`。既无动作又无 deviation 行 = 静默跳过（最高坏轮）。
-- **收尾硬序（含审计）**：lane 产物齐 → 派只读审计子代理（三查：开工卡+marker／调用痕×产物双验／lane 产物门；量化找 ≥3 缺口；结论引 file:line；只读盘、不看自述；缺件写「不可判」不许绿）→ 把产物/偏差/审计行写进本轮 trace（只写结论摘要 + 回执路径；本 build 无日志本）→ 删标记。无子代理 harness = 一条 shell 三查，条目只写结论摘要 + 回执路径（命令原文落项目文件或 `.scratch/<slug>/audit.log`），标 `脚本降级`；审计代理 pin 主会话同款模型；不允许自述顶包。
+- **收尾硬序（含审计）**：lane 产物齐 → 派只读审计子代理（三查：开工卡+marker／调用痕×产物双验／lane 产物门；量化找 ≥3 缺口；结论引 file:line；只读盘、不看自述；缺件写「不可判」不许绿）→ 把产物/偏差/审计行写进本轮 trace（只写结论摘要 + 回执路径；本 build 无日志本）→ **最终回复最后一行写 `本轮流程: …`**（与 `Skills called:` 同序同集合）→ 删标记。无子代理 harness = 一条 shell 三查，条目只写结论摘要 + 回执路径（命令原文落项目文件或 `.scratch/<slug>/audit.log`），标 `脚本降级`；审计代理 pin 主会话同款模型；不允许自述顶包。
 
 **Token-for-human principle (V2.006, user policy).** The user has plenty of
 tokens and does not want to be involved: whenever extra tokens can replace a

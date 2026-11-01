@@ -29,6 +29,9 @@ files; this build ships no logbook or self-upgrade loop). Version notes v10–v4
 in `CHANGELOG.md`; rule details live in `references/` (§0–§5 split files).
 
 
+**V2.055: the card is always fenced, and every round ends with one visible flow line (which skills it actually used).**
+Same V2.054 behaviour, plus: ① **the kickoff card always goes inside a ``` fence — unconditionally** (V2.050 made the fence conditional on "the chat surface may swallow newlines"; the same DSH window then rendered the card as a tidy block on some rounds and as one crammed paragraph on others — a fence is the only form the renderer honours every time). Every field keeps its own line, no `**` inside the card, and a value longer than ~120 characters continues on an indented `·` line instead of stretching one line into a paragraph; ② **the round's final message ends with exactly one `本轮流程:` line** — the human-visible twin of `Skills called:`: same skill names, same call order, driver name and lane label never appear. Example: `本轮流程: ask-matt(inline) → grilling → to-spec(inline) → tdd → code-review`. It is the **last line of the reply** (nothing after it) and it appears on task, read-only and STOP rounds alike; a round whose reply lacks it is malformed (V2.055 field: the user asked for one line that names the chain, because "did it really use the skill?" should be answerable from the chat instead of from NOTES). ③ **an old-name project names this skill the old way — that name IS this skill** — in a project whose `AGENTS.md` still says “加载 `autopilot`” or carries `autopilot: on`, a harness lookup of `autopilot` fails (the skill is `automatt` now). **That failure is not “the workflow is unavailable”**: load `automatt`, then do the V2.054① conversion in the same round — the project file's old name is exactly what you are about to fix. Falling back to “no driver, just do the task by hand” is **malformed**: such a round has no card, no ledger entry and no commit (V2.055 field: an eval round obeyed the sandbox's “加载 `autopilot`” line, got “unknown or no longer available”, and then worked entirely without the driver). Detail in `references/delivery-check.md`, `references/anchor.md`, `references/self-answer.md`, `references/core-triggers.md`, `references/usage-log.md`.
+
 **V2.054: rename migration converges to one mechanism (no grace window; only the project's opt-in point is converted).**
 Same V2.053 behaviour, plus: ① **the old credential line is a conversion target, not a second opt-in** — this skill was renamed (`autopilot` → `automatt`); the **only** credential is `automatt: on`. A project whose `AGENTS.md` still carries the old line `autopilot: on` is **not opted in** and there is **no migration window**: that round's first job is to convert the project's **opt-in point** — every old name **pointing at this skill** inside the project's `AGENTS.md` (the credential line `autopilot: on`, and any invocation line naming `autopilot` / `/autopilot`) becomes the new name, and this skill's own pointer dir `.autopilot/` → `.automatt/` (mechanical, enumerable, git-recoverable ⇒ just do it, and list the changed paths in the ledger entry); after the conversion the project is opted in and the round drives normally. **Nothing else in the user's project is touched**: old names in the project's own docs/scripts/config/commands/logbook filenames are the user's text, not driver business — leave them alone, and they never justify creating a second logbook (V2.054 field: the V2.049 rule rewrote *every* old-name reference in the workspace; a skill used by many GitHub users must not rewrite their repositories). A **read-only** round performs no conversion (it writes nothing) and instead ends with a one-line migration hint naming the exact line to change. ② **a brand-new project gets the new name only** — whenever the driver writes an opt-in credential itself, it writes `automatt: on`; the old name is never written and never mentioned. Detail in `references/usage-log.md`, `references/anchor.md`, `references/trace-discipline.md`.
 
@@ -177,7 +180,8 @@ above only routes; the pointed file decides.
    - ① 每行行首必须是字段名（`开工卡｜…` / `本轮调用：` / `调用面：` / `分流：` / `正身：` / `链·产物：`），**一行只允许一个字段名**；
    - ② 卡内**不写 `**` 加粗**（行内加粗 + 长行 = 渲染成糊墙）；字段间分隔用 `｜`；
    - ③ 值太长（如必读集一串路径）可以**续行**，续行缩进两格并以 `·` 起头，字段名仍留在自己的行首；
-   - ④ 聊天端可能吞换行时，**整卡包在 ``` 围栏里发**；NOTES.md 里同样按这六行写（围栏可不留）。
+   - ④ **整卡一律包在 ``` 围栏里发**（V2.055：不再判断「聊天端会不会吞换行」——同一个 DSH 窗口有时渲染成块、有时挤成一整段，**围栏是唯一每次都被尊重**的形态）；NOTES.md 里同样按这六行写（围栏可不留）。
+   - ⑤ **单行别超过 ~120 字**：超长的值（必读集、产物清单）走缩进续行（`·` 起头），别把一行拉成一段——那是「挤在一起」的另一半原因。
    照抄这个模板（尖括号换成实际值）：
 
    ```
@@ -220,7 +224,12 @@ above only routes; the pointed file decides.
    logbook), then write the `Skills called:` line in call order (grep-audit anchor: top of `NOTES.md`, or the **final
    message** on read-only rounds that write no NOTES). `链:` and
    `Skills called:` carry **skill names only** — never the driver name
-   `automatt`, never a lane label (`lane-a`, `LaneA`) (V2.039). Read-only
+   `automatt`, never a lane label (`lane-a`, `LaneA`) (V2.039). Then **end the
+   reply with the human-facing twin** (V2.055): the final message's **last line**
+   is `本轮流程: <skill> → <skill> → …`, carrying the same names in the same
+   order as `Skills called:` (e.g. `本轮流程: ask-matt(inline) → grilling →
+   to-spec(inline) → tdd → code-review`); nothing follows it, and read-only /
+   STOP rounds carry it too — a reply without it is malformed. Read-only
    rounds point `审计:` at `.scratch/<slug>/audit.log` — driver-owned, not a
    repo file (V2.039). Closeout per
    `verification-gates.md`; delete the marker (single-round open-close

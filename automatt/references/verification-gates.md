@@ -66,6 +66,11 @@
 
 ## 6. Field-distilled additions (V2.008)
 
+- **门误伤 ≥3 次 ⇒ 改门，不改文案（V2.055，另一台机器同族 3 次）。** 同一个门连续三次把**合法内容**判红（禁词表把「剧透」这个词本身判成泄露、把「不写 X」「X 是禁词」这种解释句式判成泄露），说明**门的判据错了**，不是文案错了：第三次起必须**先改门**（加 allowlist / 收紧到陈述句 / 先剥标签再匹配），并在 NOTES 记「门改了什么、为什么」。拿改文案绕过门 = 把门的可信度磨掉；**门一旦常红就等价于没有门**（见 §4 的老规矩）。
+- **新加的断言 / 判定脚本，先拿真产物跑一次（V2.055）。** 新写的门第一个动作：拿**当前真产物**跑它（期望绿），或拿**旧产物**跑它（期望红）——跑完再继续写实现。现场三例：一条新写的指纹断言把 `content="11120 · sha"` 写成 `content="11120·sha"`（少个空格），写完没在真产物上验，直到数据涨到一万条才红；另两次是**自拟判定脚本自己算错**（一次假绿 19 条、一次假红 9 条）。**判定逻辑不许自拟**：能复用既有门就复用，自写就必须先做上面这次双向试跑。
+- **无 git / 无固定点时，审查基线怎么写（V2.055，跨机器同族 ≥3 次）。** `code-review` 只给「`git diff <fixed-point>...HEAD`」；项目没有 git 历史（空目录新建）或本轮没有固定点时：用**时间点文件快照清单**当基线（开工那一刻的文件清单 + sha256 落一份 `.scratch/<slug>/baseline.txt`），在 `deviation:` 记「无 git，基线=快照清单」，然后照常做双轴审查。**不许因为拿不到 diff 就跳过审查。**
+
+
 - **No-harness expected-value discipline.** Every invented assertion's
   expected value MUST cite an independent source in the NOTES (contract
   comment / upstream standard behaviour / the user's own words) — never
