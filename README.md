@@ -50,7 +50,7 @@ Windows PowerShell（若报执行策略错误，先跑 `Set-ExecutionPolicy -Sco
 & ([scriptblock]::Create((irm https://raw.githubusercontent.com/zkkk9555/automatt-skill/main/install.ps1)))
 ```
 
-默认装到 `~/.agents/skills/`（DeepSeek Harness 读这个目录）；脚本会自动探测当前 harness，命中且唯一时多写一份（支持 claude / codex / cursor / opencode / zcode / dsh / workbuddy）。装完**必须去工具里确认 skill 列表出现了 automatt**。常用变体：`--harness dsh` 指定 harness，`--ref V2.054` 装指定版本（**默认就钉在当前版本 tag 上**，所以「我装的是哪一版」有答案），`--dry-run` 预览，`--slim` 只要 driver，`--dir` 自定义目录，`--uninstall` 卸载。怕装错？先 `--dry-run` 预览。
+默认装到 `~/.agents/skills/`（DeepSeek Harness 读这个目录）；脚本会自动探测当前 harness，命中且唯一时多写一份（支持 claude / codex / cursor / opencode / zcode / dsh / workbuddy）。装完**必须去工具里确认 skill 列表出现了 automatt**。常用变体：`--harness dsh` 指定 harness，`--ref 2.0.56` 装指定版本（**默认就钉在当前版本 tag 上**，所以「我装的是哪一版」有答案），`--dry-run` 预览，`--slim` 只要 driver，`--dir` 自定义目录，`--uninstall` 卸载。怕装错？先 `--dry-run` 预览。
 
 </details>
 

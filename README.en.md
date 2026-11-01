@@ -78,7 +78,7 @@ Default target is `~/.agents/skills/` (DeepSeek Harness reads that
 directory); the script also writes to your detected harness dir when
 unambiguous (claude / codex / cursor / opencode / zcode / dsh / workbuddy).
 **Verify in your tool that the skill list shows automatt.** Variants:
-`--harness dsh`, `--ref V2.054` (install a pinned version — the default is
+`--harness dsh`, `--ref 2.0.56` (install a pinned version — the default is
 already pinned to the current version tag, so "which version did I install"
 has an answer), `--dry-run`, `--slim`, `--dir`, `--uninstall`.
 
