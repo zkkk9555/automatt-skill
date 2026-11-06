@@ -18,7 +18,7 @@ $ErrorActionPreference = 'Stop'
 #   & ([scriptblock]::Create((irm https://raw.githubusercontent.com/zkkk9555/automatt-skill/main/install.ps1))) -Harness zcode -DryRun
 
 $PubUrl = 'https://github.com/zkkk9555/automatt-skill'
-$PubRef = if ($Ref) { $Ref } else { '2.0.57' }   # 发版脚本每次从 VERSION 重写这一行：钉版本 ⇒「我装的是哪一版」有答案
+$PubRef = if ($Ref) { $Ref } else { '2.0.58' }   # 发版脚本每次从 VERSION 重写这一行：钉版本 ⇒「我装的是哪一版」有答案
 $UpstreamNames = @('ask-matt','code-review','codebase-design','diagnosing-bugs','domain-modeling','grill-me','grill-with-docs','grilling','handoff','implement','implement-spec','improve-codebase-architecture','pr','prototype','research','retro','setup-matt-pocock-skills','tdd','teach','to-questionnaire','to-spec','to-tickets','triage','wait-what','wayfinder','wizard','writing-for-agents')
 
 function Harness-Dir($h) {
