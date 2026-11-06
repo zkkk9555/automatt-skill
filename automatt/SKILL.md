@@ -29,6 +29,9 @@ files; this build ships no logbook or self-upgrade loop). Version notes v10–v4
 in `CHANGELOG.md`; rule details live in `references/` (§0–§5 split files).
 
 
+**2.0.63: a split must land in the ledger — one intent, one entry.**
+Same 2.0.62 behaviour, plus: when a round splits a multi-intent message (「顺便…再把…」) the split must be **visible in the ledger**, not only in the commits — **one intent, one `## date·slug` entry** (two intents = two entries, even when they share a round). Why: the held-out field had a round that correctly made two commits (`fix(docs)` + `feat(cli)`) but registered a **single** slug, so the audit trail says 「one unit of work」 while two happened — the split existed in the repo and not in the evidence. The reverse (two entries, one commit) is equally wrong. 判据：多意图题面下 slug 数 < 2 ⇒ P1（现有检查，未改）。
+
 **2.0.62: nobody is coming to commit for you, and `调用=` counts tool calls plus inline reads.**
 Same 2.0.61 behaviour, plus: ① **a sub-agent must commit its own round** — never end with 「留给你/父会话 commit」; on the held-out battery two rounds left real work in the index and untracked files (a staged deletion plus a modified README; an untracked ledger + `.scratch/`), so from any other machine the round simply did not happen. Logbook-in-repo means **you** commit it (a read-only round commits its ledger as `chore`); the only exception is a STOP round that must not touch the workspace at all. ② **`调用=<n>` counts tool calls AND inline reads** — it equals the number of names in the chain, so with inline reads the total is > the tool-call count (2.0.60 said 「Skill-tool calls」 while V2.041 says inline bodies must also be in the chain — the two could not both hold, field: one round wrote `调用=7（工具4＋inline3）` and flagged the contradiction). Definition now: `调用=` = 链里名字数 = 工具调用数 + inline 读数.
 
