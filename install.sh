@@ -13,7 +13,7 @@
 set -euo pipefail
 
 PUB_URL="${AUTOMATT_PUB_URL:-https://github.com/zkkk9555/automatt-skill}"   # 可用环境变量指向镜像/本地测试包
-PUB_REF="2.0.61"   # 发版脚本每次从 VERSION 重写这一行：钉版本 ⇒「我装的是哪一版」有答案（--ref 可覆盖）
+PUB_REF="2.0.62"   # 发版脚本每次从 VERSION 重写这一行：钉版本 ⇒「我装的是哪一版」有答案（--ref 可覆盖）
 # 27 upstream names, hardcoded manifest for count verification
 UPSTREAM_NAMES="ask-matt code-review codebase-design diagnosing-bugs domain-modeling grill-me grill-with-docs grilling handoff implement implement-spec improve-codebase-architecture pr prototype research retro setup-matt-pocock-skills tdd teach to-questionnaire to-spec to-tickets triage wait-what wayfinder wizard writing-for-agents"
 
