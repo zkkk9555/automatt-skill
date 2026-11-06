@@ -29,6 +29,9 @@ files; this build ships no logbook or self-upgrade loop). Version notes v10–v4
 in `CHANGELOG.md`; rule details live in `references/` (§0–§5 split files).
 
 
+**2.0.60: the chain must add up — count your Skill-tool calls, then make the chain the same length.**
+Same 2.0.59 behaviour, plus: the ledger's `自检:` line gains **`调用=<n>`** (how many `skill` tool calls this round actually made, driver excluded), and **the chain must have exactly that many names** — `链:` / `Skills called:` / `本轮流程:` same set, length == `调用=`. Why: "list every skill you invoked" is a memory task and memory slips (this battery: one round called `code-review` and left it out; the round before, two rounds left out `domain-modeling`). A count is **checkable**: 数一遍调用、数一遍链，不等就补。判据：链名数 ≠ `调用=` ⇒ P2；链里出现没调用过的名字 ⇒ 同样 P2。Detail in `references/usage-log.md`、`references/self-answer.md`。
+
 **2.0.59: the chain is transcribed from the call log, never from memory — support skills count.**
 Same 2.0.58 behaviour, plus: **`链:` / `Skills called:` / `本轮流程:` are written LAST, by replaying the round's actual invocations** — every `skill` tool call of the round (support skills included: `domain-modeling`, `codebase-design`, `improve-codebase-architecture`, `research`, `browser-act`, `grilling`, `teach`, …) plus every inline body you read, in call order, driver name excluded. One-line test: **你这一轮按了几次 Skill 工具，链里就该有几个名字**（driver 自己不算）。 Why: two rounds in this battery called `domain-modeling` and listed only the "main" four — the chain is evidence, and evidence assembled from memory is not evidence (the same miss also appeared in an earlier held-out round, so this is the third occurrence). Do not re-derive the chain from the plan you wrote on the card; if the two disagree, the **call log wins** and the card was wrong.
 
