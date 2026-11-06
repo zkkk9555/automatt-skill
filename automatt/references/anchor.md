@@ -9,6 +9,7 @@
 - **车道一行**：A=单行直接改＋per-class 门 ｜ B=spec 嵌 ≤3 切片＋红绿＋review ｜ C=map＋票图（`effort-flow.md`）｜ D=先建反馈环再修（`bug-flow.md`）｜ E=triage 后只做 ready 票。
 - **档位**：默认 full；lite 五件地板（卡/车道/一个通道产物/验证一句/日志一行）缺一 = malformed；na 仅限纯理解·误触发·STOP（`self-answer.md`）。
 - **纯理解/查询轮**：不碰仓库文件；四件最小产物 = 分流行 ＋ 检索面/命中计数（含负证据口径；**不抄命中内容**）＋ 对话内检索清单（`core-triggers.md` 只读节；本 build 无日志本）。**只读轮也是任务**：T0（ask-matt tool/inline）＋卡/刷新＋收尾条，缺一 = malformed；`lane=none` 不是免记理由（V2.036）。
+- **没加载就别出卡（2.0.57，反伪造）**：开工卡 / 账本条目 / `本轮流程:` 三样都是**driver 加载之后**的产物。当轮必须有加载痕（`skill` 工具调 `automatt`，或 inline 读安装副本并记 `automatt=inline(read path:line)`）；**没有加载痕却出了这三样 = 伪造接管 = malformed**。自查一句话：卡上的 `正身:` 只列子 skill（**不写 `automatt`**）；`本轮流程:` 至少一个真调过的 skill 名（`(无子 skill 调用)`／`(none)`／空 = malformed）。发现自己正凭记忆或凭 `AGENTS.md` 模板写卡 ⇒ 停：要么去加载，要么按普通流程干、三样都不写。
 - **收尾三件（V2.055）**：① `Skills called:` 按调用序；② 本轮 trace 三行（产物/deviation/审计；本 build 无日志本）；③ **最终回复的最后一行是 `本轮流程: …`**（与 `Skills called:` 同序同集合，只写 skill 名、不写 driver 名 / lane；只读轮与 STOP 轮同样要有）。`链` 与 `Skills called` 同序；删标记（单轮开闭照旧记豁免行）。
 
 **你读到的正文可能不是最新版（V2.047）**：harness 加载的是**安装副本**（`~/.dsh/skills/<skill>`、`~/.codex/skills/<skill>`），不是开发仓里的源目录——两者不同步时，你会按旧规则干活却不自知。开发/验收语境下，开工前核对**本轮实际加载的正文版本行**与源仓 `VERSION`：不一致先同步（或明确记 deviation）。自检脚本：`node evals/check-install.mjs`（有安装副本落后即退出码 1）。

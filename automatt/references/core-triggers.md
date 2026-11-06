@@ -83,6 +83,8 @@ harness 遵守子 skill 的 `disable-model-invocation: true` 时（DSH），Skil
 
 **开工点名（V2.019，连续 5 轮未加载正身换来）：** 动手前在 trace/NOTES 写一行本轮要调的正身清单（例：`正身清单：diagnosing-bugs、tdd、code-review`），然后逐一经 Skill 工具调用（被拒则读已安装正文 inline，见 `references/invocation.md`）；代执行仍先加载再 inline。清单缺一项、或清单有点名但无对应调用痕 = deviation（自觉守不住的，点名替自觉）。**收尾调用痕自查（V2.020，点名只管写不管调换来）：** 收尾前 grep JOURNAL `Skills called` 行（无 JOURNAL 仓看 NOTES 顶部同名行），清单每项须有对应调用痕；有点名无调用痕 = deviation 当轮补记（v1.182–v1.184 code-review 连犯 3 轮换来）。（V2.025：点名并入开工卡「正身」行，不再另写一份；V2.039 起该行是卡的固定字段 `正身：<skill 清单>｜必读集：<paths:lines>`，不必再自造行。）
 
+**driver 自己也要有加载痕（2.0.57）：** 这条对**子 skill** 说的是「点名必须有调用痕」；同一个要求先落在 **driver 自己**身上——本轮要么有 `skill` 工具调用 `automatt`，要么 inline 读过安装副本并在卡上记 `automatt=inline(read path:line)`。**没有这条痕就不许出开工卡/账本条目/`本轮流程:`**（那三样是加载的产物，不是加载的替代品）；`正身:` 里也不许写 `automatt`（driver 不是正身）。现场：另一个项目里多轮打印 `卡刷新｜…｜正身=automatt (无子 skill)`、`本轮流程: (无子 skill 调用)`，全程没加载过 skill —— 仪式在、流程不在，比不接管更坏（让「有没有跑流程」不可判）。
+
 **正身硬痕（V2.023，读=调混淆终结）：** 点名清单每项须有调用痕＋正文引用：Skill 工具返回（正身版本/行或返回要点一句），或 `inline(read <path>:<line>)`＋一句正文引用（工具被 harness 拒绝时）；inline 代执行须先有调用痕（工具或 inline 读）＋注 substitution ＋正身行号，无痕 inline = malformed。收尾从grep JOURNAL文本升为调用痕＋产物双验：清单每项须同时有调用痕与对应产物（spec/ticket/红绿输出/review结论），缺一 = deviation当轮补记。
 
 ## research 硬入口（V2.006 立项，V2.010 量化）
